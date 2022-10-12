@@ -9,7 +9,7 @@ import pickle
 import numpy as np
 import plotly.express as px
 
-data = pd.read_csv(r'C:\Users\USUARIO\Documents\GitHub\Oil-Gas-Projects\API Oil Production\Datasets\Oil_prod_curve.csv')
+data = pd.read_csv(r'C:\Users\USUARIO\Documents\GitHub\Oil-Gas-Projects\API_Oil_Production\Datasets\Oil_prod_curve.csv')
 well = data.groupby(['API']).count()
 wells = well.index[well.Oil > 40]
 data = data[data.API.isin(wells)]
@@ -53,7 +53,7 @@ def plots(df):
 
 def forecast():
     st.markdown('### Forecasting Model')
-    model = pickle.load(open(r'C:\Users\USUARIO\Documents\GitHub\Oil-Gas-Projects\API Oil Production\Notebooks\Oil_pred.pkl','rb'))
+    model = pickle.load(open(r'C:\Users\USUARIO\Documents\GitHub\Oil-Gas-Projects\API_Oil_Production\Notebooks\Oil_pred.pkl','rb'))
 
     API = st.slider('Well', 0, len(data.API.unique()),3500)  
     Formation_ID = st.slider('Formation', 0, len(data.Formation_ID.unique()), 38)
