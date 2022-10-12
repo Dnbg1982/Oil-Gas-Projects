@@ -9,19 +9,23 @@ import numpy as np
 import plotly.express as px
 
 data = pd.read_csv(r'C:\Users\USUARIO\Documents\GitHub\Oil-Gas-Projects\API Oil Production\Datasets\Oil_prod_curve.csv')
+well = data.groupby(['API']).count()
+wells = well.index[well.Oil > 40]
+data = data[data.API.isin(wells)]
 
-st.title('DECAY WELL PRODUCTION PREDICTED BY MACHINE LEARNING')
+st.title('DECAY WELL PRODUCTION PREDICTED BY MACHINE LEARNING (XGBOOST)')
 
 def home():
-    st.text('Data was gather from Kaggle Datasets')
+    st.text('Data was gather from Kaggle Datasets: https://www.kaggle.com/c/datascienceatraisa')
     st.markdown('#### This is a web app to make predictions of well-production using Machine Learning instead of Curve Decay Formula')
+    st.write('Oil Production forecasting is one of the most important problems in the Oil and Gas industry. Accurately estimating the amount of liquid that could be produced by a certain well along its lifetime is very crucial especially from the economical and business side. There are several factors that contribute into it, starting from the well location, geological factors, drilling technologies used by the operator drilling, neighboring wells and their effect on each others.')
 
 st.sidebar.title('Analytics')
-options = st.sidebar.radio('SHEETS',options=['Home','Tables','Plots','Interactive Plots','Forecasting'])
+options = st.sidebar.radio('SHEETS',options=['Home','Tables','Plots','Interactive Plot','Forecasting'])
 
 def describe(df):
     st.markdown('### Data')
-    st.write(data.head()[['API','Oil','Formation_name', 'Basin_name', 'Lateral_Length', 'Month_Ord', 'Basin_ID']])
+    st.write(data.sort_values(by='Lateral_Length', ascending=False).head()[['API','Oil','Formation_name', 'Basin_name', 'Lateral_Length', 'Month_Ord', 'Basin_ID']])
 
     st.markdown('### Data Statistics')
     st.write(data.describe())
@@ -43,7 +47,7 @@ def plots(df):
     ax.tick_params(axis='x', labelsize=11)
     st.pyplot(fig)
 
-    st.markdown("### All Wells Cummulative Production Month by Month")
+    st.markdown("### All Wells Cummulative Decay Production Month by Month")
     sum_produ = df.groupby('Month_Ord').sum()['Oil']
     st.line_chart(sum_produ)
 
@@ -51,11 +55,11 @@ def forecast():
     st.markdown('### Forecasting Model')
     model = pickle.load(open(r'C:\Users\USUARIO\Documents\GitHub\Oil-Gas-Projects\API Oil Production\Notebooks\Oil_pred.pkl','rb'))
 
-    API = st.slider('Well', 0, len(data.API.unique()),1)  
-    Formation_ID = st.slider('Formation', 0, len(data.Formation_ID.unique()), 1)
+    API = st.slider('Well', 0, len(data.API.unique()),3500)  
+    Formation_ID = st.slider('Formation', 0, len(data.Formation_ID.unique()), 38)
     #Basin_ID = st.slider('Basin',0, len(data.Basin_ID.unique()),1)
-    Lateral_Length = st.slider('Lateral_Length', 0 , 16000, 2000)
-    Month_Ord  = st.slider('Month_After_Peak', 0, 48, 1)
+    Lateral_Length = st.slider('Lateral_Length', 0 , 16000, 8000)
+    # Month_Ord  = st.slider('Month_After_Peak', 0, 48, 1)
 
     Basin_name = st.sidebar.selectbox('Basin Name:', data.Basin_name.unique())
     if  Basin_name == 'DENVER BASIN':
@@ -68,19 +72,41 @@ def forecast():
         Basin_ID = 3
     
      
-    start_month, end_month = st.sidebar.select_slider('Month Range:',options=data.Month_Ord.unique(), value=(0,36))
+    start_month, end_month = st.sidebar.select_slider('Month Range:',options=data.Month_Ord.unique()[0:40], value=(0,36))
 
-    df = {'Well':API, 'Formation':Formation_ID, 'Basin':Basin_ID, 'Lateral Length':Lateral_Length, 'Month':Month_Ord}
-    df = pd.DataFrame(df, index=[0])
+    df = pd.DataFrame()
+    for x in range(start_month,end_month+1):
+         df_n = pd.DataFrame({'Well':API, 'Formation':Formation_ID, 'Basin':Basin_ID, 'Lateral Length':Lateral_Length, 'Month_Ord':x}, index=[x])
+         df = pd.concat([df,df_n], axis=0)
+
+    #df = {'Well':API, 'Formation':Formation_ID, 'Basin':Basin_ID, 'Lateral Length':Lateral_Length, 'Month':Month_Ord}
+    # df = pd.DataFrame(df, index=[0])
 
     def main():  
         if st.button('Predict'):
             makeprediction = model.predict(df)
-            output = round(int(makeprediction[0]),2)
-            st.success(f'This well is going to produce around: {output} barrels in month {Month_Ord} after the peak')
+            output = np.array(makeprediction, dtype=int)
+            st.success(f'This well is going to produce around: \n\n {output.sum()} barrels from month {start_month} to {end_month} after the peak')
 
     if __name__ == '__main__':  
         main()    
+
+    predicts = model.predict(df)
+    index = np.arange(start_month, end_month).tolist()
+    data_preds = pd.DataFrame(zip(predicts, data.Oil[data.API == API][start_month:end_month]),columns=('Predictions', 'Oil_Production'), index=index)
+    
+    fig, ax = plt.subplots(1,1, figsize=(20,10))
+    sns.lineplot(data=data_preds, x=data_preds.index, y=data_preds.Predictions)
+    sns.lineplot(data=data_preds, x=data_preds.index, y=data_preds.Oil_Production)
+    ax.set_title(f'(Well {API}) Production vs Predictions from month {start_month} to {end_month}', fontsize=18)
+    ax.set_xlabel('MONTH', fontsize=13)
+    ax.legend(['Predictions', 'Real'])
+    ax.set_ylabel('OIL PRODUCTION', fontsize=13)
+    ax.set_xlim(start_month,end_month)
+    ax.set_ylim(0,20000)
+    ax.tick_params(axis='y', labelsize=11)
+    ax.tick_params(axis='x', labelsize=11)
+    st.pyplot(fig)
 
 def interactive_plot(df):
     st.header('Interactive Plot')
