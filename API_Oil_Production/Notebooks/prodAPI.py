@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-# import seaborn as sns
+import seaborn as sns
 import matplotlib.pyplot as plt
 import pickle
 import numpy as np
@@ -35,7 +35,7 @@ def plots(df):
 
     st.markdown('### Distribution Oil Production by Month')
     fig, ax = plt.subplots(1,1, figsize=(20,10))
-    #sns.boxplot(data=df, x=df.Month_Ord, y=df.Oil)
+    sns.boxplot(data=df, x=df.Month_Ord, y=df.Oil)
     ax.set_xlabel('MONTH', fontsize=13)
     ax.set_ylabel('OIL PRODUCTION', fontsize=13)
     ax.set_xlim(-0.5,20.5)
