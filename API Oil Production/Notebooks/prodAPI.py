@@ -1,4 +1,5 @@
 from tokenize import group
+from altair import FontStyle
 from sklearn.semi_supervised import LabelSpreading
 import streamlit as st
 import pandas as pd
@@ -99,7 +100,7 @@ def forecast():
     sns.lineplot(data=data_preds, x=data_preds.index, y=data_preds.Oil_Production)
     ax.set_title(f'(Well {API}) Production vs Predictions from month {start_month} to {end_month}', fontsize=18)
     ax.set_xlabel('MONTH', fontsize=13)
-    ax.legend(['Predictions', 'Real'])
+    ax.legend(['Predictions', 'Real'], fontsize=16)
     ax.set_ylabel('OIL PRODUCTION', fontsize=13)
     ax.set_xlim(start_month,end_month)
     ax.set_ylim(0,20000)
