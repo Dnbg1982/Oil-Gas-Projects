@@ -123,7 +123,7 @@ def interactive_plot(df):
 
 if options == 'Tables':
     describe(data)
-elif options == 'Interactive Plots':
+elif options == 'Interactive Plot':
     interactive_plot(data)
 elif options == 'Forecasting':
     forecast()
