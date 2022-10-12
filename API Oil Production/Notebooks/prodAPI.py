@@ -13,9 +13,8 @@ well = data.groupby(['API']).count()
 wells = well.index[well.Oil > 40]
 data = data[data.API.isin(wells)]
 
-st.title('DECAY WELL PRODUCTION PREDICTED BY MACHINE LEARNING (XGBOOST)')
-
 def home():
+    st.title('DECAY WELL PRODUCTION PREDICTED BY MACHINE LEARNING (XGBOOST)')
     st.text('Data was gather from Kaggle Datasets: https://www.kaggle.com/c/datascienceatraisa')
     st.markdown('#### This is a web app to make predictions of well-production using Machine Learning instead of Curve Decay Formula')
     st.write('Oil Production forecasting is one of the most important problems in the Oil and Gas industry. Accurately estimating the amount of liquid that could be produced by a certain well along its lifetime is very crucial especially from the economical and business side. There are several factors that contribute into it, starting from the well location, geological factors, drilling technologies used by the operator drilling, neighboring wells and their effect on each others.')
