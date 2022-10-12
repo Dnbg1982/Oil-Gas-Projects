@@ -1,6 +1,3 @@
-from tokenize import group
-from altair import FontStyle
-from sklearn.semi_supervised import LabelSpreading
 import streamlit as st
 import pandas as pd
 import seaborn as sns
