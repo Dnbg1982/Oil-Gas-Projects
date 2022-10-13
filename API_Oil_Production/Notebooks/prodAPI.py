@@ -6,7 +6,7 @@ import pickle
 import numpy as np
 import plotly.express as px
 
-data = pd.read_csv(r'C:\Users\USUARIO\Documents\GitHub\Oil-Gas-Projects\API_Oil_Production\Datasets\Oil_prod_curve.csv')
+data = pd.read_csv(r'API_Oil_Production\Notebooks\Oil_prod_curve.csv')
 well = data.groupby(['API']).count()
 wells = well.index[well.Oil > 40]
 data = data[data.API.isin(wells)]
@@ -50,7 +50,7 @@ def plots(df):
 
 def forecast():
     st.markdown('### Forecasting Model')
-    model = pickle.load(open(r'C:\Users\USUARIO\Documents\GitHub\Oil-Gas-Projects\API_Oil_Production\Notebooks\Oil_pred.pkl','rb'))
+    model = pickle.load(open(r'API_Oil_Production\Notebooks\Oil_pred.pkl','rb'))
 
     API = st.slider('Well', 0, len(data.API.unique()),3500)  
     Formation_ID = st.slider('Formation', 0, len(data.Formation_ID.unique()), 38)
@@ -92,7 +92,7 @@ def forecast():
     index = np.arange(start_month, end_month).tolist()
     data_preds = pd.DataFrame(zip(predicts, data.Oil[data.API == API][start_month:end_month]),columns=('Predictions', 'Oil_Production'), index=index)
     
-    fig, ax = plt.subplots(1,1, figsize=(20,10))
+    fig, ax = plt.subplots(1,1, figsize=(20,12))
     sns.lineplot(data=data_preds, x=data_preds.index, y=data_preds.Predictions)
     sns.lineplot(data=data_preds, x=data_preds.index, y=data_preds.Oil_Production)
     ax.set_title(f'(Well {API}) Production vs Predictions from month {start_month} to {end_month}', fontsize=18)
@@ -100,7 +100,7 @@ def forecast():
     ax.legend(['Predictions', 'Real'], fontsize=16)
     ax.set_ylabel('OIL PRODUCTION', fontsize=13)
     ax.set_xlim(start_month,end_month)
-    ax.set_ylim(0,20000)
+    ax.set_ylim(-50,20000)
     ax.tick_params(axis='y', labelsize=11)
     ax.tick_params(axis='x', labelsize=11)
     st.pyplot(fig)
