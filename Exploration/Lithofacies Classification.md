@@ -41,3 +41,9 @@ RESULTS
 -------------------------------------------------------------------------------------------------------------------------
 Current best matrix score from XGBoost 
 Contest metric: 0.6 ( -0.79 )
+
+IMPROVEMENTS
+-------------------------------------------------------------------------------------------------------------------------
+- Use all available wells to train the model.
+- Add variables using feature engineering
+- Determine the importance of the rocks to grant weights, improving the performance of the model and the applicability in the industry.
