@@ -17,3 +17,7 @@ Evaluation will be done with a penalty matrix given by the competition. Given th
 
 PROJECT BREAKDOWN
 -------------------------------------------------------------------------------------------------------------------------
+1. Some data sets were explored, not only the competitor, but also different .las files to understand the structure of the data and how the log data is collected. Therefore, the lassio and welly libraries were used.
+2. Data preprocessing. 
+  2.1  Data was evaluated with pandas profiling.
+  2.2  For uniform preprocesing 3 datasets given for the competition were concatenated. 
