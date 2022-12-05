@@ -18,23 +18,24 @@ Evaluation will be done with a penalty matrix given by the competition. Given th
 PROJECT BREAKDOWN
 -------------------------------------------------------------------------------------------------------------------------
 1. Some datasets were explored, not only the competitor, but also different .las files to understand the structure of the data and how the log data is collected. Therefore, the lassio and welly libraries were used.
+
 2. Data Preprocessing
- - Data was evaluated with pandas profiling.
- - For uniform and smooth preprocesing datasets given were concatenated.
- - Drop columns which were not going to be used and fill na values.
- - Get sample to train the model (Since my computer power I diminished the number of wells choosing random wells to train the model).
+   - Data was evaluated with pandas profiling.
+   - For uniform and smooth preprocesing datasets given were concatenated.
+   - Drop columns which were not going to be used and fill na values.
+   - Get sample to train the model (Since my computer power I diminished the number of wells choosing random wells to train the model).
 
 3. Data Visualization
- - Visualize data distribution to look how different classes were balanced.
+   - Visualize data distribution to look how different classes were balanced.
 
 4. Building Model
-- Split the preporcessed data into X and Y
-- Function was made to evaluate model performance.
-- Different algorithms were used XGBosst, RandomForest and KNN
+  - Split the preporcessed data into X and Y
+  - Function was made to evaluate model performance.
+  - Different algorithms were used XGBosst, RandomForest and KNN
 
 5. Improving model
-- Data augmentation
-- Parameters were tuned using RandomizedSEarch CV
+  - Data augmentation
+  - Parameters were tuned using RandomizedSEarch CV
 
 RESULTS
 -------------------------------------------------------------------------------------------------------------------------
