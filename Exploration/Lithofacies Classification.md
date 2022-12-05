@@ -29,13 +29,13 @@ PROJECT BREAKDOWN
    - Visualize data distribution to look how different classes were balanced.
 
 4. Building Model
-  - Split the preporcessed data into X and Y
-  - Function was made to evaluate model performance.
-  - Different algorithms were used XGBosst, RandomForest and KNN
+   - Split the preporcessed data into X and Y
+   - Function was made to evaluate model performance.
+   - Different algorithms were used XGBosst, RandomForest and KNN
 
 5. Improving model
-  - Data augmentation
-  - Parameters were tuned using RandomizedSEarch CV
+   - Data augmentation
+   - Parameters were tuned using RandomizedSEarch CV
 
 RESULTS
 -------------------------------------------------------------------------------------------------------------------------
