@@ -10,3 +10,7 @@ Differentiate the part of subsurface which is salt.
 DATA
 ------------------------------------------------------------------------------------------------------------------------
 The set of images was gotten from Kaggle Salt Detection Competition. Images were chosen in various locations at random subsurface spots. (https://www.kaggle.com/competitions/tgs-salt-identification-challenge/data)
+
+EVALUATION
+------------------------------------------------------------------------------------------------------------------------
+Model was evaluated on the mean average precision at different intersection over union (IoU) thresholds.
