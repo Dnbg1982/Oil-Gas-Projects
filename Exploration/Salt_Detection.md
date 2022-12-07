@@ -14,3 +14,9 @@ The set of images was gotten from Kaggle Salt Detection Competition. Images were
 EVALUATION
 ------------------------------------------------------------------------------------------------------------------------
 Model was evaluated on the mean average precision at different intersection over union (IoU) thresholds.
+
+VISUALIZATION
+------------------------------------------------------------------------------------------------------------------------
+Training data was explored where mask recognize salt bodies in a sample of 20 random images.
+![image](https://user-images.githubusercontent.com/100526221/206059385-1342379c-54c3-447b-b88e-37c9bdeec66a.png)
+
