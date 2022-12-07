@@ -23,3 +23,11 @@ Training dataset was explored where mask recognize salt bodies in a sample of 20
 
 MODEL BREAKDOWN
 ------------------------------------------------------------------------------------------------------------------------
+1. Data augmentation was performed rotating and flipping the images.
+2. Model was built with Keras using convolutional neural network Unet approach.
+3. Plotting Model Performance ![image](https://user-images.githubusercontent.com/100526221/206061237-0aa98aa6-c499-4efd-b35f-4a6a2e30be16.png)
+
+PLOTTING RESULTS
+-------------------------------------------------------------------------------------------------------------------------
+Plotting model output to confirm how well prediction match with original mask.
+![image](https://user-images.githubusercontent.com/100526221/206061748-d43658af-c941-42c7-939a-93bcc5c65505.png)
