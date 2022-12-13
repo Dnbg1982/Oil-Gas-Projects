@@ -22,3 +22,7 @@ Plotting well features taking 6 wells as sample.
 
 MODEL BREAKTHROUGH
 -------------------------------------------------------------------------------------------------------------------------------------
+1. Fill na and null values
+2. Scaling data using RobustScaler from Sklearn
+3. Train and predict with XGBoost-Regressor 
+4. Tuning model with RandomGridSearch and GridSearchCV
