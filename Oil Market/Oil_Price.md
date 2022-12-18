@@ -29,4 +29,5 @@ MODEL BREAKTROUGH
 5. Evaluate residuals.
 6. Do the same process with the returns.
 7. Visualize prediction vs real values.
+
 ![image](https://user-images.githubusercontent.com/100526221/208325983-b055c192-0885-4300-a291-8a66df34db16.png)
