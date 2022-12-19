@@ -1,5 +1,5 @@
 # Oil Production Forecasting Using XGBoost Competition By Kaggle
-Appraisal phase could be one of the most important stages in oil industry. Since, here is where feasibility of a project based on field's oil production. To determine how many barrels reservoir engineers use a formula to estimate decay curve of production. However,  could machine learning approach do abbeter job?
+Appraisal phase could be one of the most important stages in oil industry. Since, here is where feasibility of a project based on field's oil production. To determine how many barrels a well will produce, reservoir engineers use a formula to estimate decay curve of production. However,  could machine learning approach do abbeter job?
 
 GOAL
 ---------------------------------------------------------------------------------------------------------------------------------------------------
